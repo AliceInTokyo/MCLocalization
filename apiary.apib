@@ -1,0 +1,2458 @@
+FORMAT: 1A
+
+# Let's Taste 3.0
+Proxy API is dedicated to provide configuration (Countries, Languages,...), feeds (Recipe, Social,...) and other informations for Let's Taste 3.0 application.
+
+# API Defaults
+## Errors
+Errors will be handled via response status code, if status code will be 200, errors will be handled via status that is error, bussines error code and message.
+###ERROR CODE GROUPS
+####BACKEND_ENV_VARIABLES TEST (10000+)
+      MAINTENANCE_MODE (10100)
+####HANDSHAKE_SPECIFIC_ERROR (15000+)
+      API_VERSION_INVALID (15100)
+      ACCESS_TOKEN_INVALID (15200)
+      AUTHENTICATION_INVALID (15300)
+      SYNC_ERROR (15400)
+      LOCALE_INVALID (15500)
+####DATA_PROCESSING_ERROR(20000+)
+      DEVICE_USER_VALIDATION_ERROR (20100)
+      DEVICE_SESSION_VALIDATION_ERROR (20200)
+      DEVICE_USER_SESSION_VALIDATION_ERROR (20300)
+      FAVORITE_VALIDATION_ERROR (20400)
+      APPLIANCE_VALIDATION_ERROR (20500)
+####REMOTE_SERVICE_ERROR(30000+)
+      EFC_SERVICE_ERROR(30100)
+      SCT_SERVICE_ERROR(30200))
+
+###ERROR CODES
+    10000
+    10100 'MAINTENANCE_MODE'
+    15000
+    15100 'API_VERSION_INVALID'
+    15200 'ACCESS_TOKEN_INVALID'
+    15500 'LOCALE_INVALID'
+    15300 'AUTHENTICATION_INVALID'
+    15310 'AUTHENTICATION_INVALID_ALREADY_LOGGED_IN'
+    15320 'AUTHENTICATION_INVALID_ALREADY_LOGGED_OUT'
+    15330 'AUTHENTICATION_INVALID_REGISTRATION_THROUGH_OTHER_SERVICE'
+    15340 'AUTHENTICATION_INVALID_NEED_TO_SIGN_IN'
+    15400 'SYNC_ERROR'
+    20000
+    20100 'DEVICE_USER_VALIDATION_ERROR'
+    20110 'DEVICE_USER_PRESENCE_VALIDATION_ERROR'
+    20120 'DEVICE_USER_ELX_CONSUMER_ID_HAS_ALREADY_BEEN_TAKEN_VALIDATION_ERROR'
+    20130 'DEVICE_USER_ELX_CONSUMER_ID_PRESENCE_VALIDATION_ERROR'
+    20140 'DEVICE_USER_EMAIL_PRESENCE_VALIDATION_ERROR'
+    20150 'DEVICE_USER_PASSWORD_PRESENCE_VALIDATION_ERROR'
+    20160 'DEVICE_USER_FIRST_NAME_PRESENCE_VALIDATION_ERROR'
+    20170 'DEVICE_USER_LAST_NAME_PRESENCE_VALIDATION_ERROR'
+    20180 'DEVICE_USER_NOT_FOUND_VALIDATION_ERROR'
+    20200 'DEVICE_SESSION_VALIDATION_ERROR'
+    20210 'DEVICE_SESSION_TYPE_MISMATCH_VALIDATION_ERROR'
+    20220 'DEVICE_SESSION_BRAND_PRESENCE_VALIDATION_ERROR'
+    20230 'DEVICE_SESSION_LANGUAGE_PRESENCE_VALIDATION_ERROR'
+    20240 'DEVICE_SESSION_ACCESS_TOKEN_PRESENCE_VALIDATION_ERROR'
+    20250 'DEVICE_SESSION_DEVICE_UID_PRESENCE_VALIDATION_ERROR'
+    20260 'DEVICE_SESSION_DEVICE_TYPE_PRESENCE_VALIDATION_ERROR'
+    20270 'DEVICE_SESSION_DEVICE_PLATFORM_PRESENCE_VALIDATION_ERROR'
+    20280 'DEVICE_SESSION_API_VERSION_PRESENCE_VALIDATION_ERROR'
+    20290 'DEVICE_SESSION_DEVICE_UID_UNIQUENESS_VALIDATION_ERROR'
+    20300 'DEVICE_USER_SESSION_VALIDATION_ERROR'
+    20310 'DEVICE_USER_SESSION_ID_MUST_BE_BLANK_VALIDATION_ERROR'
+    20400 'FAVORITE_VALIDATION_ERROR'
+    20410 'FAVORITE_FAVORITABLE_ID_PRESENCE_VALIDATION_ERROR'
+    20420 'FAVORITE_FAVORITABLE_TYPE_PRESENCE_VALIDATION_ERROR'
+    20500 'APPLIANCE_VALIDATION_ERROR'
+    20510 'APPLIANCE_NOT_FOUND_VALIDATION_ERROR'
+    20520 'APPLIANCE_ACTIVE_VALIDATION_ERROR'
+    20530 'APPLIANCE_DEVICE_USER_ASSIGN_VALIDATION_ERROR'
+    20540 'APPLIANCE_NOT_ASSIGNED_VALIDATION_ERROR'
+    20600 'PURCHASE_VALIDATION_ERROR'
+    20610 'PURCHASE_HANDLER_BRAND_PRESENCE_VALIDATION_ERROR'
+    20620 'PURCHASE_HANDLER_CONSUMER_ID_PRESENCE_VALIDATION_ERROR'
+    20630 'PURCHASE_HANDLER_PURCHASE_DATE_PRESENCE_VALIDATION_ERROR'
+    20640 'PURCHASE_HANDLER_PNC_PRESENCE_VALIDATION_ERROR'
+    20650 'PURCHASE_HANDLER_APPLIANCE_TYPE_PRESENCE_VALIDATION_ERROR'
+    20660 'PURCHASE_HANDLER_CURRENCY_PRESENCE_VALIDATION_ERROR'
+    20670 'PURCHASE_HANDLER_STORE_ID_PRESENCE_VALIDATION_ERROR'
+    20680 'PURCHASE_HANDLER_PURCHASE_DATE_INVALID_VALIDATION_ERROR'
+    20700 'DEVICE_USERS_APPLIANCE_VALIDATION_ERROR'
+    20710 'DEVICE_USERS_APPLIANCE_UNIQUENESS_VALIDATION_ERROR'
+    20800 'FEED_PROVIDER_VALIDATION_ERROR'
+    20810 'FEED_PROVIDER_UNSUPPORTED_RESOURCE_VALIDATION_ERROR'
+    20900 'RECIPE_VALIDATION_ERROR'
+    20910 'RECIPE_NO_RECIPE_WITH_THIS_ID_VALIDATION_ERROR'
+    21000 'PRODUCT_ERROR'
+    21010 'PRODUCT_NO_PRODUCT_WITH_THIS_ID_ERROR'
+    30000
+    30100 'EFC_SERVICE_ERROR'
+    30110 'EFC_SERVICE_NO_CONSUMER_WITH_THIS_EMAIL_ERROR'
+    30120 'EFC_SERVICE_INCORRECT_PASSWORD_ERROR'
+    30130 'EFC_SERVICE_EMAIL_ALREADY_IN_USE_ERROR'
+    30140 'EFC_SERVICE_UNEXPECTED_ERROR'
+    30150 'EFC_SERVICE_EMAIL_REQUIRED_ERROR'
+    30160 'EFC_SERVICE_INCORRECT_DATE_ERROR'
+    30170 'EFC_SERVICE_NO_CONSUMER_WITH_THIS_ID_ERROR'
+    30180 'EFC_SERVICE_NO_SUCH_APPLIANCE_TYPE_ERROR'
+    30190 'EFC_SERVICE_NO_SUCH_BRAND_ERROR'
+    30200 'EFC_SERVICE_NO_SUCH_CURRENCY_ERROR'
+    30210 'EFC_SERVICE_NO_SUCH_STORE_ID_ERROR'
+    30220 'EFC_SERVICE_CAST_VALIDATION_ERROR'
+    30230 'EFC_SERVICE_ACTIVITY_TYPE_ERROR'
+    35000 'SCT_SERVICE_ERROR'
+    35010 'SCT_SERVICE_UNEXPECTED_ERROR'
+    35020 'SCT_SERVICE_BRAND_PRESENCE_VALIDATION_ERROR'
+    35030 'SCT_SERVICE_COUNTRY_PRESENCE_VALIDATION_ERROR'
+    35040 'SCT_SERVICE_LANGUAGE_PRESENCE_VALIDATION_ERROR'
+    35050 'SCT_SERVICE_LANGUAGE_UNSUPPORTED_CODE_VALIDATION_ERROR'
+
+
+    
++ Response 200 (application/json)
+
+        {
+            "status": "error", 
+            "error": {
+                "code":10000,
+                "message":"15200,15500",
+                "debug_message":"Invalid access token!,Missing country or language for your device!"
+            }, 
+            "data": null
+        }
+
+# API Changes 
+
+## Archive
+
+### Favorites (3.3.2015)
+When user will change application language, favorites that where saved in other language will be synchronized
+in that way that first will fetch any resources (like recipes, brand_content, etc.) for current language, and then if resource
+does not exist in current language, will fetch resources in fallback langauge (language in witch favorites where created).
+Favorites entity will have language_code attribute, also related resources that are favoritizable have language_code attribute and ids attribute
+to request subset of collection. Affected resouces are recipes, brand_contents.
+### API Version (4.3.2015)
+Removed major api version from api_version and system_time.
+### Default Locale (30.3.2015)
+Added default locale, witch will identify default language on device.
+### User & Registration Fields (6.5.2015)
+Added resource api for user's registration with validation error and added api for registration fields for selected region(country).
+### Required Registration Fields (6.5.2015)
+Added required and optional separation for available registration fields.
+### Rename User to DeviceUser (6.5.2015)
+Rename User resource to DeviceUser in registration fields and device user regiration
+
+## Compatibility, Authentication and Synchronization Changes (13.11.2015)
+
+- Always send required API version in `api_version` HTTP header
+- Device Session
+    - URL changed to `/api/{major_api_version}/device_session` (in singular!) for all actions (`id` parmeter was also removed, as `update` and `destroy` are authenticated and users can manage only their device sessions)
+    - `brand` renamed to `brand_name`
+    - `device_locale` renamed to `locale_code`
+    - `api_version` removed, every request contains `api_version` HTTP header instead
+    - other attributes removed (see Device Session resource)
+- Device User
+    - URL changed to `/api/{major_api_version}/device_user` (in singular!) for all actions (`id` parameter was removed)
+- Synchronization Changes 
+    - URL changed to `/api/{major_api_version}/synchronization/changes{?sync_at}`
+    - API was simplified - no "initial synchronization", always returns changed resources for current device session (i.e. also keywords and keyword groups are returned on first synchronization)
+    - A new resource `locales` is returned instead of countries and languages. 
+- Synchronization Time
+    - URL changed to `/api/{major_api_version}/synchronization/time`
+- Locale
+    - countries and languages have been merged to a new resource
+    - use `code` attribute to select locale from DeviceSession#locale_code
+
+# Group Compatibility
+
+Every request has to include required major API version in its URL (e.g. `/api/{major_api_version}/device_session`) and fully-qualified version string in `api_version` HTTP header. If required API version is no longer supported, `API_VERSION_INVALID` is returned.
+
+Note: If `api_version` HTTP header is not provided, the latest minor version is used. This is for development purposes, front-end apps should always provide required API version in HTTP header. 
+
+## Api Version [/api/api_version]
+
+Provides current API version.
+
+### Show [GET]
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "major":1,
+                "minor":4
+            }
+        }
+
+# Group Authentication
+
+## Device Session [/api/{major_api_version}/device_session]
+
+Device-specific configuration and authentication.
+
++ brand_name - Defines device brand
++ device_type - tablet or phone
++ device_platform - iOS or Android
++ device_uid - UID of device on server 
++ device_token - APN service
++ locale_code - Unique combination of language and country
++ app_mode - Special mode for auth and visibility options.
++ access_token - authentication token for following calls
+
+### Create [POST]
+
+Creates a new device session to authorize following API calls. If a device session with given `device_uid` exists, it will be reused and updated. If there is no locale with suggested `locale_code`, a default locale is selected. Only attributes in request body example are allowed.
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
+
++ Request (application/json)
+    
+    + Body
+    
+            {
+                "device_session":{
+                    "brand_name":"aeg",
+                    "device_type":"tablet",
+                    "device_platform":"android",
+                    "device_uid":"913f9c49dcb544e2087cee284f4a00b7",
+                    "device_token":"212e0b373ca64984f573baceedd254ea",
+                    "app_mode":0,
+                    "locale_code": "sk_SK"
+                }
+            }
+
+    
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null, 
+            "data": {
+                "access_token":"913f9c49dcb544e2087cee284f4a00b7",
+                "app_mode":0,
+                "badge_count":0,
+                "locale_code": "en_SK"
+            }    
+        }
+        
+### Update [PATCH]
+
+Updates current device session. Only attributes in request body example can be updated.
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+        
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
+    + Body
+            
+            {
+                "device_session":{
+                    "locale_code":"en_SK",
+                    "device_token":"212e0b373ca64984f573baceedd254ea",
+                    "badge_count":0
+                }
+            }
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "access_token":"913f9c49dcb544e2087cee284f4a00b7",
+                "app_mode":0,
+                "badge_count":0,
+                "locale_code":"en_SK"
+                }
+        }
+
+### Destroy [DELETE]
+
+Destroys current device session.
+    
++ Request (application/json)
+    
+    + Header
+        
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": null
+        }
+        
+## Device User Session [/api/{major_api_version}/device_user_session]
+
+User authentication for device session.
+
++ email
++ password
+
+### Create [POST]
+
+Authenticates session for user.
+
++ Parameters
+    
+    + major_api_version (required, string, `v1`) ...  API major version.
+    
++ Request (application/json)
+    
+    + Header
+        
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
+    + Body
+    
+            {
+                "device_user_session":{
+                    "email":"ait-test@example.com", "password":"123456"
+                }
+            }
+            
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "id":220552,
+                "email":"ait-test@example.com"
+            } 
+        }
+
+### Destroy [DELETE]
+
+Destroys current session for device.
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    
++ Request (application/json)
+    
+    + Header
+        
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": null
+        }
+
+
+
+# Group Synchronization
+
+## Changes [/api/{major_api_version}/synchronization/changes{?sync_at}]
+
+Resources modified or deleted after `sync_at` for current device session.
+
+### Index [GET]
+
++ Parameters
+    
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + sync_at (optional, number, `0`) ...  Last updated changes.
+
++ Request (application/json)
+    
+    + Header
+        
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": [
+                "locales", 
+                "interface_texts",
+                "keywords", 
+                "keyword_groups"
+            ]
+        }
+
+## Time [/api/{major_api_version}/synchronization/time]
+
+System time for precise synchronization.
+
+### Show [GET]
+ 
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": 1234567890 
+        }
+
+# Group Personalization
+API is used to register owned appliances by user or guest. User session resource is handling all logic related to creation and deletion of users.
+If existing user is logging in device where guest already exist and he has any favorites, we are asking if guests favorites should be merged to 
+user favorites. Decision for merged favorites is set via paramter `merge_favorites` is send during user_session or user#create.
+During user logging procederu, guest is destroyed. After non-guest user is logged out we can create new guest user. User registration
+is separated resource `user#create`. Possible authorization via facebook or twitter in future.
+
+## Get, create user's appliances [/api/{major_api_version}/device_users/{device_user_id}/appliances]
+Will fetch all appliances in groups for particular user, or update active list of appliances. User have a registred set of appliaces. 
+### Create device user's appliances [POST]
+
++ Parameters
+    
+    + device_user_id (required, number, `1`) ...  User id.
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
+    + Body
+    
+            {
+                "appliance":{
+                    "pnc":"113412341234123",
+                    "elc":"13",
+                    "serial_number":"000123456790",
+                    "name":"MyAppliance"
+                }
+                    
+            }
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "id":1,
+                "pnc":"113412341234123",
+                "elc":"13",
+                "serial_number":"000123456790",
+                "active":true,
+                "name":"MyAppliance"
+            }
+        }
+        
+### Get device user's appliances [GET]      
+
++ Parameters
+    
+    + device_user_id (required, number, `1`) ...  User id.
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": [
+                        {
+                        "id":1,
+                        "active":true,
+                        "pnc":"113412341234123", 
+                        "elc":"12",
+                        "serial_number":"000123456789",
+                        "name":"MyAppliance1",
+                        "client_pnc":"000987987987",
+                        "manual":
+                            {
+                                "title":"SomeManual1",
+                                "path":"app://my.aeg/feeds/content_browser?target=http://google.com"
+                            }
+                        },
+                        
+                        {
+                        "id":2,
+                        "active":false,
+                        "pnc":"113412341234124", 
+                        "elc":"13",
+                        "serial_number":"000123456790",
+                        "name":"MyAppliance2",
+                        "client_pnc":"000987987987",
+                        "manual":
+                            {
+                                "title":"SomeManual2",
+                                "path":"app://my.aeg/feeds/content_browser?target=http://google.com"
+                            }
+                        }
+                    ]
+        }
+        
+## Activate user's appliances [/api/{major_api_version}/device_users/{device_user_id}/appliances/{id}]        
+### Update active device user's appliances [PATCH] 
+
++ Parameters
+
+    + id (required, number, `1`) ...  id from device user's appliance.
+    + device_user_id (required, number, `1`) ...  User id.
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
+    + Body
+    
+            {
+                "appliance":{
+                    "id":1,
+                    "pnc":"113412341234123",
+                    "active":true,
+                    "elc":"13",
+                    "serial_number":"000123456790",
+                    "name":"MyAppliance"
+                    }
+            }
+            
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "id":1,
+                "pnc":"113412341234123",
+                "elc":"13",
+                "serial_number":"000123456790",
+                "active":true,
+                "name":"MyAppliance"
+            }
+        }
+        
+### FEATURED Delete user's appliances [DELETE]
++ Parameters
+
+    + id (required, number, `1`) ...  id from device user's appliance.
+    + user_id (required, number, `1`) ...  User id.
+    + major_api_version (required, string, `v1`) ...  API major version.
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
+    + Body
+    
+            {
+                "appliance":{
+                    "pnc":"113412341234123"
+                }
+            }
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": null
+        }
+        
+        
+# Group Feeds & Keywords
+Will fetch all feeds localized (access_token) and personalized (user_token). Search for particular resources.
+Valid sources are `recipes`, `brand_contents` and `social`. Social will be served via tint (facebook, twitter, youtube...) to pull social feeds.
+Feed attribute `weight` is same for whole resource and written on each item. 
+## Summary
+ALL KINDS 
+[ Recipes, StaticPosts => [Tool, Folder, Article, BrandContent], Social, Product, Stain ]
+
+ALL TYPES 
+[ Taste, Care, Service, Appliance, RecipeWizard, RelatedContent, Search ]
+
+DEFAULT SCOPE
+[Brand]
+
+DEFAULT ORDER 
+[Rank, UpdatedAt]
+
+
+### TASTE FEED
+`[client instructions - populate content till recipes are given]`
+
+Kinds:  `Recipes, StaticPosts, Social`
+
+Scopes: `Keywords (AND method), Personalized order`
+
+Rules:  `[client instructions - 3 yellow tiles: recipe wizard, tools & tutorials, latest from AEG social]`
+        `All StaticPosts.where(rank > 100)`
+        
+        `All Recipes`
+            `[client instructions- 1 social post every 4 lines of recipes] ` 
+            `every 12 Social.where( tint_name = ‘taketastefurther’)`
+            
+        `[ client instructions - no tutorials, no tools (converters, calculators, other)]`    
+        `No RegularPosts.where(rank < 100)`
+        
+### CARE FEED
+Kinds:  `StaticPosts, Social`
+
+Scopes: `Keywords (AND method), Personalized order`
+
+Rules:  `All StaticPosts.where(rank > 100)`
+
+        `All Social.where(tint_name = ‘caremore’)`
+
+### SERVICE FEED
+Kinds: StaticPosts
+Scopes: Keywords (AND method)
+Rules:  All StaticPosts.where(rank > 100)
+          
+### APPLIANCE FEED
+Kinds: StaticPosts
+Scopes: Keywords (AND method)
+Rules:  All StaticPosts.where(rank > 100)
+           
+### RECIPE WIZARD FEED
+Kinds:  Recipe
+Scopes: Keywords (AND method), Fulltext
+Rules:  All Recipes 
+
+### RELATED CONTENT FEED
+Kinds:  BrandContent, Article, Tool
+Scopes: FeedType,  Keywords(OR method), Keywords overlap order
+Rules:  All [BrandContent, Article, Tool]
+
+### SEARCH FEED
+Kinds:  BrandContent, Article, Stain
+Scopes: Fulltext(AND method), Ordered by relevance
+Rules:  RecipeWizard ( with counter)
+        Search results
+
+## Get feeds mocks [/api/{major_api_version}/feeds/mocks/{source}]
+This resource provide predefined set of dummy data for requested resource.
+### Get feeds mocks[GET]
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + source (required, string, `recipes`) ...  Will define for witch source we are asking data.
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "per_page":"200",
+                "page":"3",
+                "total_count":"2344",
+                "source":[{
+                            "id":1234123,
+                            "title":"Steak",
+                            "summary":"Small steak with potatos",
+                            "rank":1
+                }]
+                
+            }
+        }
+        
+## Get feeds [/api/{major_api_version}/feeds/{source}{?per_page}{?page}{?keywords}{?fields}{?query}]
+### Get feeds [GET]
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + source (required, string, `recipes`) ...  Will define for witch source we are asking data.
+    + per_page (optional, number, `100`) ...  Define how many items per page could be displayed.
+    + page (optional, number, `2`) ...  Define offset for items from full range.
+    + keywords (optional, string, `Chicken,Fish`) ...  Define search query keyword to filter collections.
+    + fields (optional, string, `title,id`)
+    + query (optional, string, `chicken soup`) ... Fulltext search .
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "per_page":"200",
+                "page":"3",
+                "total_count":"2344",
+                "source":[{
+                            "id":1234123,
+                            "title":"Steak",
+                            "summary":"Small steak with potatos",
+                            "rank":1
+                }]
+                
+            }
+        }
+
+## Get feeds v2.0 [/api/{major_api_version}/feeds/{?type}{?per_page}{?next_page_attrs}{?keywords}{?logical_operator}{?query}{?kind}]
+This resource provide predefined set of data for requested distinct datasets as `taste`, `care`, `comfort`, `appliance`, `service` and `search`.
+Response attribute kind can be `tool`, `recipe`, `article`, `folder`, `facebook`, `twitter`, `pinterest` and `youtube`.
+Fields attribute could filter only `kind` attributes. If we are using `search` as type, we can specify rank via other types as keywords.
+Taste (tool, folder, recipe, product, article, facebook) - Mock IFA, Real data for appstore (Tool - Native Recipe Wizzard, Tool - HTML Converter, Folder - accessories, Folder - Summer recipes, Recipe - real recipe, Article - How to cook in sousvide, Facebook - social, tintup.com, Product - accessory )
+Care (tool, folder, stain, article) - Mock IFA, Real data for appstore 
+Comfort(tool, article) - Mock IFA
+Appliances(tool, folder, article) - Mock IFA
+Services(tool, folder, article) - Mock IFA
+
+### Get feeds [GET]
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + type (optional, string, `taste`) ...  Will define for witch source we are asking data.
+    + kind (optional, string, `recipe`) ... Will improve result collection
+    + per_page (optional, number, `100`) ...  Define how many items per page could be displayed.
+    + next_page_attrs (optional, string) ...  Pass field from previous response.
+    + keywords (optional, string, `Chicken,Fish`) ...  Define search query keyword to filter collections.
+    + query (optional, string, `chicken soup`) ... Fulltext search .
+    + logical_operator (optional, string, `and|or`) ... Operator used for keywords.
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "next_page_attrs":"%7B%22rl%22:0,%22i%22:15,%22off%22:%7B%22default%22:15%7D%7D",
+                "total_count":2344,
+                "posts":[{
+                    "title":"Small steak with potatos",
+                    "kind":"recipe",
+                    "types":["taste"],
+                    "style":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/recipe_preview/3",
+                    "recipe":{
+                        "id":"3",
+                        "duration":"120 min",
+                        "difficulty":"Advanced"
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"ETABS1 (Accessory)",
+                    "kind":"product",
+                    "types":["taste"],
+                    "style":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/product_preview/34",
+                    "product":{
+                        "id":34
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Dark chocolate stain",
+                    "kind":"stain",
+                    "types":["care"],
+                    "style":"care",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/stain_preview/34",
+                    "stain":{
+                        "id":34
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Recipe wizard",
+                    "kind":"tool",
+                    "types":["taste"],
+                    "style":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/recipe_wizard",
+                    "tool":{
+                        "id":1
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Label wizard",
+                    "kind":"tool",
+                    "types":["care"],
+                    "style":"care",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/label_wizard",
+                    "tool":{
+                        "id":1
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Converter",
+                    "kind":"tool",
+                    "types":["taste"],
+                    "style":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/tools/external/converter.html",
+                    "tool":{
+                        "id":2
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Get Started",
+                    "kind":"article",
+                    "types":["taste"],
+                    "style":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/article/external/converter.html",
+                    "article":{
+                        "id":3
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Xmas recipes",
+                    "kind":"folder",
+                    "types":["taste"],
+                    "style":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds?target=taste&keywords=xmas_recipes&logical_operator=and",
+                    "folder":{
+                        "id":3
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Ever wish you could...",
+                    "kind":"facebook",
+                    "types":["taste"],
+                    "style":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/facebook/facebook_464297566935356",
+                    "facebook":{
+                        "url": "http://sociallysorted.com.au/schedugram-instagram-tool-happy-dance/",
+                        "source": 1,
+                        "created": 1405279803,
+                        "user_id": 446,
+                        "visible": 1,
+                        "comments": "Ever wish you could schedule your #instagram posts? Well, now you can. @schedugram @SociallySorted #tintsocial http://bit.ly/1qgOQCE",
+                        "social_id": "facebook_464297566935356",
+                        "social_post_id": "464297566935356_794409327257510",
+                        "height": 0,
+                        "width": 0,
+                        "original_image": "http://sociallysorted.com.au/wp-content/uploads/600x315xInstagram-Tool-Schedugram.jpg.pagespeed.ic.zZiHh4KZlR.jpg",
+                        "author": "{"picture":"https://graph.facebook.com/464297566935356/picture","name":"Tint","username":"Tint","link":"https://facebook.com/464297566935356"}",
+                        "image": "http://d14vgdf03cg2x3.cloudfront.net/tint/image/fetch/w_300,c_limit/http%3A%2F%2Fsociallysorted.com.au%2Fwp-content%2Fuploads%2F600x315xInstagram-Tool-Schedugram.jpg.pagespeed.ic.zZiHh4KZlR.jpg",
+                        "title": "Ever wish you could schedule your #instagram posts? Well, now you can. @schedugram @SociallySorted #tintsocial http://bit.ly/1qgOQCE",
+                        "timestamp": 1405279803,
+                        "post_id": "user_432255155",
+                        "description": "ScheduGram is an Instagram Tool that helps you manage multiple accounts and schedule images - allowing you to better share your awesome visual content.",
+                        "cta": "",
+                        "highlight": "",
+                        "recur_frequency": "",
+                        "recur_offset": "",
+                        "geo": "",
+                        "offset": 0,
+                        "ref_timestamp": 14053533410
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                }]
+                
+            }
+        }
+
+## Get mocked feeds v2.0 [/api/{major_api_version}/mocks/feeds/{?type}{?per_page}{?page}{?keywords}{?query}{?kind}]
+This resource provide predefined set of data for requested distinct datasets as `taste`, `care`, `comfort`, `appliances` , `services` and `search`.
+Response attribute kind can be `tool`, `recipe`, `article`, `folder`, `facebook`, `twitter`, `pinterest` and `youtube`.
+Fields attribute could filter only `kind` attributes. If we are using `search` as type, we can specify rank via other types as keywords.
+Taste (tool, folder, recipe, product, article, facebook) - Mock IFA, Real data for appstore (Tool - Native Recipe Wizzard, Tool - HTML Converter, Folder - accessories, Folder - Summer recipes, Recipe - real recipe, Article - How to cook in sousvide, Facebook - social, tintup.com, Product - accessory )
+Care (tool, folder, stain, article) - Mock IFA, Real data for appstore 
+Comfort(tool, article) - Mock IFA
+Appliances(tool, folder, article) - Mock IFA
+Services(tool, folder, article) - Mock IFA
+
+### Get mocked feeds [GET]
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + type (required, string, `taste`) ...  Will define for witch source we are asking data.
+    + kind (optional, string, `recipe`) ... Will improve result collection
+    + per_page (optional, number, `100`) ...  Define how many items per page could be displayed.
+    + page (optional, number, `2`) ...  Define offset for items from full range.
+    + keywords (optional, string, `Chicken,Fish`) ...  Define search query keyword to filter collections.
+    + query (optional, string, `chicken soup`) ... Fulltext search .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "per_page":"200",
+                "page":"3",
+                "total_count":"2344",
+                "posts":[{
+                    "title":"Small steak with potatos",
+                    "kind":"recipe",
+                    "type":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/recipe_preview/3",
+                    "recipe":{
+                        "id":"3",
+                        "duration":"120 min",
+                        "difficulty":"Advanced"
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"ETABS1 (Accessory)",
+                    "kind":"product",
+                    "type":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/product_preview/34",
+                    "product":{
+                        "id":34
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Dark chocolate stain",
+                    "kind":"stain",
+                    "type":"care",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/stain_preview/34",
+                    "stain":{
+                        "id":34
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Recipe wizard",
+                    "kind":"tool",
+                    "type":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/recipe_wizard",
+                    "tool":{
+                        "id":1
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Label wizard",
+                    "kind":"tool",
+                    "type":"care",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/label_wizard",
+                    "tool":{
+                        "id":1
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Converter",
+                    "kind":"tool",
+                    "type":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/tools/external/converter.html",
+                    "tool":{
+                        "id":2
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Get Started",
+                    "kind":"article",
+                    "type":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/article/external/converter.html",
+                    "article":{
+                        "id":3
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Xmas recipes",
+                    "kind":"folder",
+                    "rank":1,
+                    "path":"app://my.aeg/feeds?source=taste&keywords=xmas_recipes",
+                    "folder":{
+                        "id":3
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                },{
+                    "title":"Ever wish you could...",
+                    "kind":"facebook",
+                    "type":"taste",
+                    "rank":1,
+                    "path":"app://my.aeg/facebook/facebook_464297566935356",
+                    "facebook":{
+                        "url": "http://sociallysorted.com.au/schedugram-instagram-tool-happy-dance/",
+                        "source": 1,
+                        "created": 1405279803,
+                        "user_id": 446,
+                        "visible": 1,
+                        "comments": "Ever wish you could schedule your #instagram posts? Well, now you can. @schedugram @SociallySorted #tintsocial http://bit.ly/1qgOQCE",
+                        "social_id": "facebook_464297566935356",
+                        "social_post_id": "464297566935356_794409327257510",
+                        "height": 0,
+                        "width": 0,
+                        "original_image": "http://sociallysorted.com.au/wp-content/uploads/600x315xInstagram-Tool-Schedugram.jpg.pagespeed.ic.zZiHh4KZlR.jpg",
+                        "author": "{"picture":"https://graph.facebook.com/464297566935356/picture","name":"Tint","username":"Tint","link":"https://facebook.com/464297566935356"}",
+                        "image": "http://d14vgdf03cg2x3.cloudfront.net/tint/image/fetch/w_300,c_limit/http%3A%2F%2Fsociallysorted.com.au%2Fwp-content%2Fuploads%2F600x315xInstagram-Tool-Schedugram.jpg.pagespeed.ic.zZiHh4KZlR.jpg",
+                        "title": "Ever wish you could schedule your #instagram posts? Well, now you can. @schedugram @SociallySorted #tintsocial http://bit.ly/1qgOQCE",
+                        "timestamp": 1405279803,
+                        "post_id": "user_432255155",
+                        "description": "ScheduGram is an Instagram Tool that helps you manage multiple accounts and schedule images - allowing you to better share your awesome visual content.",
+                        "cta": "",
+                        "highlight": "",
+                        "recur_frequency": "",
+                        "recur_offset": "",
+                        "geo": "",
+                        "offset": 0,
+                        "ref_timestamp": 14053533410
+                    },
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    }
+                }]
+                
+            }
+        }
+        
+## Get related keywords [/api/{major_api_version}/related_keywords/{?count}{?query}]
+Keywords are search in active language only.
+### Get related keywords [GET]
++ Parameters
+    
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + count (optional, number, `100`) ...  Define how many items should return.
+    + query (optional, string, `chicken soup`) ... Fulltext search .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": [
+                {
+                    "id": 1,
+                    "key": "key1",
+                    "value": "value1",
+                    "keyword_group": {
+                      "id": 1
+                    },
+                    "language": {
+                      "id": 1
+                    },
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": "2014-01-01T16:22:44.111Z"
+                },
+                {
+                    "id": 2,
+                    "key": "key2",
+                    "value": "value2",
+                    "keyword_group": {
+                      "id": 1
+                    },
+                    "language": {
+                      "id": 2
+                    },
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": "2014-01-01T16:22:44.111Z"
+                }]
+        }
+
+# Group Table: Recipe
+## Get single recipe [/api/{major_api_version}/recipes/{id}{?sync_at}]
+Fech single recipe resource (table resource). Note: Consider proccess_uid parameter as unique identifier per process for recipe source (table).
+### Get recipe [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `2`) ...  Unique identifier per source (table).
+    + sync_at (optional, number, `1344141341414433`) ...  Last updated changes.
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "recipe_data": "x",
+                "language_code": "en_EN",
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": "2014-01-01T16:22:44.111Z"
+            }
+        }
+        
+## Get mocked single recipe [/api/{major_api_version}/mocks/recipes/{?id}{?process_uid}]
+Fech single recipe resource (table resource). 
+### Get mocked recipe [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (optional, number, `2`) ...  Unique identifier per source (table).
+    + process_uid (optional, number, `NormalRecipeCannelloni`) ...  Unique identifier per process for recipe source (table).
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "recipe_data": "x",
+                "language_code": "en_EN",
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": "2014-01-01T16:22:44.111Z"
+            }
+        }
+        
+# Group Table: Product
+## Get single product [/api/{major_api_version}/products/{id}]
+Fech and save single product resource (table resource). 
+### Get product [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `2`) ...  Unique identifier per source (table) .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "title":"E40HBAE1",
+                "pnc":"902 976 560",
+                "classification":"Accessory",
+                "bar_code":"7321422645192",
+                "function":"Dish care",
+                "description":"This is description text",
+                "webshop_url":"http://google.com",
+                "assets":{
+                    "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                    "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                },
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z",
+                "deleted_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+
+## Get mocked single product [/api/{major_api_version}/mocks/products/{id}]
+Fech and save single product resource (table resource). 
+### Get mocked product [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `2`) ...  Unique identifier per source (table) .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "title":"E40HBAE1",
+                "pnc":"902 976 560",
+                "classification":"Accessory",
+                "bar_code":"7321422645192",
+                "function":"Dish care",
+                "description":"ometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating. Dimensions: Width – extends from 38–52 cm, depth 33 cm, height 3 cm",
+                "assets":{
+                    "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                    "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                },
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z",
+                "deleted_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+
+# Group Table: Converter
+
+## Get converters [/api/{major_api_version}/converters]
+Fech collection of converters (table resource). 
+### Get converters [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": [{
+                "title":"Full Steam",
+                "description":"Some desc",
+                "assets":{
+                    "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                },
+               "sub_converters":[{
+                    "title":"Beef",
+                    "suggestion":null,
+                    "sub_converters":[{
+                        "title":"100-120 Celsius",
+                        "suggestion":{
+                            "note":"Some kind of note",
+                            "time":"25-35 min",
+                            "temperature":"100-120 C",
+                            "food_probe_temperature":"30-40 C",
+                            "water_cylinder":"Full",
+                            "oven_level":"2",
+                            "oven_function":"FullSteam",
+                            "oven_setup":{
+                                "time":"30",
+                                "time_unit":"Minute",
+                                "temperature":"100",
+                                "temperature_unit":"Celsius",
+                                "food_probe_temperature":"30",
+                                "food_probe_temperature_unit":"Celsius",
+                                "name":"FullSteam_NormalProcess"
+                            }
+                        }
+                        
+                    },{
+                        "title":"100-120 Celsius",
+                        "suggestion":{
+                            "note":"Some kind of note",
+                            "time":"25-35 min",
+                            "temperature":"100-120 C",
+                            "food_probe_temperature":"30-40 C",
+                            "water_cylinder":"Full",
+                            "oven_level":"2",
+                            "oven_function":"FullSteam",
+                            "oven_setup":{
+                                "time":"30",
+                                "time_unit":"Minute",
+                                "temperature":"100",
+                                "temperature_unit":"Celsius",
+                                "food_probe_temperature":"30",
+                                "food_probe_temperature_unit":"Celsius",
+                                "name":"FullSteam_NormalProcess"
+                            }
+                        }
+                        
+                    }]
+                }]
+                
+            }]
+        }
+
+
+# Group Table: Stain
+## Get single stain [/api/{major_api_version}/stains/{id}]
+Fech and save single product resource (table resource). 
+### Get stain [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (optional, number, `2`) ...  Unique identifier per source (table).
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "title":"Chocolate",
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating.",
+                "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                "keywords":["chocolate", "blood"],
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z",
+                "deleted_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+
+## Get mocked single stain [/api/{major_api_version}/mocks/stains/{?id}]
+Fech and save single product resource (table resource). 
+### Get mocked stain [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (optional, number, `2`) ...  Unique identifier per source (table) .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "title":"Chocolate",
+                "description":"ometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating. Dimensions: Width – extends from 38–52 cm, depth 33 cm, height 3 cm",
+                "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg",
+                "keywords":["chocolate", "blood"],
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z",
+                "deleted_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+
+# Group Table: Fabric Advice
+
+## Get fabric advice ingredients [/api/{major_api_version}/fabric_advice_ingredients]
+Fech collection of materials for fabric advice (table resource). 
+### Get fabric advice ingredients [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": [{
+                    "id":1,
+                    "title":"Black",
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "assets":{
+                    }
+                },{
+                    "id":2,
+                    "title":"Blue",
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "assets":{
+                    }
+                },{
+                    "id":3,
+                    "title":"Yellow",
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "assets":{
+                    }
+                },{
+                    "id":4,
+                    "title":"White",
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "assets":{
+                    }
+                },{
+                    "id":5,
+                    "title":"Jeans",
+                    "group_name":null,
+                    "fabric_type":"material",
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg"
+                    }
+                },{
+                    "id":6,
+                    "title":"Wool2",
+                    "group_name":"Wool",
+                    "fabric_type":"symbol",
+                    "assets":{
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    } 
+            }]
+        }
+
+## Get fabric advice mocked ingredients [/api/{major_api_version}/mocks/fabric_advice_ingredients]
+Fech collection of materials for fabric advice (table resource). 
+### Get fabric advice mocked ingredients [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": [{
+                    "id":1,
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "title":"Black"
+                    "assets":{
+                    }
+                },{
+                    "id":2,
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "title":"Blue"
+                    "assets":{
+                    }
+                },{
+                    "id":3,
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "title":"Yellow"
+                    "assets":{
+                    }
+                },{
+                    "id":4,
+                    "group_name":null,
+                    "fabric_type":"color",
+                    "title":"White"
+                    "assets":{
+                    }
+                },{
+                    "id":5,
+                    "title":"Jeans",
+                    "fabric_type":"material",
+                    "group_name":null,
+                    "assets":{
+                        "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg"
+                    }
+                },{
+                    "id":1,
+                    "title":"Wool2",
+                    "fabric_type":"symbol",
+                    "group_name":"Wool",
+                    "assets":{
+                        "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                    } 
+                }]
+            }
+        }
+
+## Get fabric advice [/api/{major_api_version}/fabric_advices{?fabric_advice_ingredient_ids}]
+Fech single result for combination of material, color and symobls. 
+### Get fabric advice [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + fabric_advice_ingredient_ids (required, number, `1,2,3,4,5`) ...  Fabric ingredients ids.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": [{
+                "title":"AEG some stuff ",
+                "advice_type":"claim",
+                "path":null,
+                "description":null,
+                "assets":{
+                }
+            },{
+                "title":"Suggestion 1",
+                "advice_type":"suggestion",
+                "path":null,
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating.",
+                "assets":{
+                    "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                }
+            },{
+                "title":"Suggestion 2",
+                "advice_type":"suggestion",
+                "path":null,
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating.",
+                "assets":{
+                    "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                }
+            },{
+                "title":"Caring for denim",
+                "advice_type":"fabric_advice",
+                "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/tools/external/converter.html",
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating.",
+                "assets":{
+                }
+            },{
+                "title":"Caring for denim",
+                "advice_type":"detergent_advice",
+                "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/tools/external/converter.html",
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating.",
+                "assets":{
+                    "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg"
+                }
+            }]
+        }
+
+## Get fabric advice mocks [/api/{major_api_version}/mocks/fabric_advices{?fabric_advice_ingredient_ids}]
+Fech single result for combination of material, color and symobls. 
+### Get fabric advice mocks [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + fabric_advice_ingredient_ids (required, number, `1,2,3,4,5`) ...  Fabric ingredients ids.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": [{
+                "title":"Suggestion 1",
+                "advice_type":"suggestion",
+                "path":null,
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating. Dimensions: Width – extends from 38–52 cm, depth 33 cm, height 3 cm",
+                "assets":{
+                    "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                }
+            },{
+                "title":"Suggestion 2",
+                "advice_type":"suggestion",
+                "path":null,
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating. Dimensions: Width – extends from 38–52 cm, depth 33 cm, height 3 cm",
+                "assets":{
+                    "icon":"http://dev.w3.org/SVG/tools/svgweb/samples/svg-files/adobe.svg"
+                }
+            },{
+                "title":"Caring for denim",
+                "advice_type":"fabric_advice",
+                "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/tools/external/converter.html",
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating. Dimensions: Width – extends from 38–52 cm, depth 33 cm, height 3 cm",
+                "assets":{
+                }
+            },{
+                "title":"Caring for denim",
+                "advice_type":"detergent_advice",
+                "path":"app://my.aeg/feeds/content_browser?target=http://proxy.ait.net/api/v1/tools/external/converter.html",
+                "description":"Sometimes you need more trays for your cooking or baking for large gatherings or multiple dishes. This universal extendable oven tray has an adjustable width to fit every kind of oven. Non-stick coating. Dimensions: Width – extends from 38–52 cm, depth 33 cm, height 3 cm",
+                "assets":{
+                    "image":"http://www.precisionnutrition.com/wordpress/wp-content/uploads/2008/05/Precision-Nutrition_Palm-Sized-Portions_Steak-Example_Male.jpg"
+                }
+            }]
+        }
+
+# Group Table: Keyword
+## Get keywords [/api/{major_api_version}/keywords{?sync_at}]
+Fech keyword resources(table resources). 
+### Get keywords [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + sync_at (optional, number, `1344141341414433`) ...  Last updated changes.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+  
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": [{
+                "id": 1,
+                "key": "key1",
+                "value": "value1",
+                "keyword_group": {
+                  "id": 1
+                },
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": "2014-01-01T16:22:44.111Z"
+            },
+            {
+                "id": 2,
+                "key": "key2",
+                "value": "value2",
+                "keyword_group": {
+                  "id": 1
+                },
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": "2014-01-01T16:22:44.111Z"
+            }]
+        }
+
+## {Featured} Get keyword [/api/{major_api_version}/keywords/{id}]
+Fech single resource (table resource). 
+### Get keyword [GET]
+
++ Parameters
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `2`) ...  Unique identifier per source (table) .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "key": "key",
+                "value": "value",
+                "keyword_group": {
+                  "id": 1
+                },
+                "language": {
+                  "id": 1
+                },
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": "2014-01-01T16:22:44.111Z"
+            }
+        }
+
+# Group Table: Keyword Group
+## Get keywords [/api/{major_api_version}/keyword_groups{?sync_at}]
+Fech keyword resources(table resources). Keyword group has not parents in one depth level only.
+### Get keyword groups [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + sync_at (optional, number, `1234567890`) ...  Last updated changes.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+  
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": [
+                {
+                    "id": 1,
+                    "key": "key1",
+                    "value": "value1",
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": "2014-01-01T16:22:44.111Z"
+                },
+                {
+                    "id": 2,
+                    "key": "key2",
+                    "value": "value2",
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": "2014-01-01T16:22:44.111Z"
+                }]
+        }
+
+## {Featured} Get keyword group [/api/{major_api_version}/keyword_groups/{id}]
+Fech single resource (table resource). 
+### Get keyword group [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `2`) ...  Unique identifier per source (table) .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok",
+            "error": null,
+            "data": {
+                "id": 1,
+                "key": "key",
+                "value": "value",
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": "2014-01-01T16:22:44.111Z"
+            }
+        }
+
+# Group Table: Locale
+## Get locales [/api/{major_api_version}/locales{?sync_at}]
+Fech locale resources(table resources).
+### Get locales [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + sync_at (optional, number, `1234567890`) ...  Last updated changes.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+  
++ Response 200 (application/json)
+        
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": [{
+                "id": 1,
+                "code": "en",
+                "language":{
+                    "id": 1,
+                    "name":"English",
+                    "notification_code":"eng",
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": null
+                },
+                "country":{
+                    "id": 1,
+                    "name":"United Kingdom",
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": null
+                },
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": null
+            }] 
+        }
+    
+        
+# Group Table: Country
+## {Removed} Get countries [/api/{major_api_version}/countries{?sync_at}]
+Fech country resources(table resources). Country has uniqeu languages, only international language is exceluded and is common for each country.
+### Get countries [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + sync_at (optional, number, `1234567890`) ...  Last updated changes.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+  
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": [
+                {
+                    "id": 1,
+                    "code": "GB",
+                    "name": "UK",
+                    "native_name": "United Kingdom",
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": "2014-01-01T16:22:44.111Z"
+                },
+                {
+                    "id": 2,
+                    "code": "US",
+                    "name": "USA",
+                    "native_name": "United States of America",
+                    "created_at": "2014-01-01T16:22:44.111Z",
+                    "updated_at": "2014-01-01T16:22:44.111Z",
+                    "deleted_at": "2014-01-01T16:22:44.111Z"
+                }
+            ] 
+        }
+
+## {Removed} Get country [/api/{major_api_version}/countries/{id}]
+Fech single resource (table resource). 
+### Get country [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Parameters
+
+    + id (required, number, `2`) ...  Unique identifier per source (table) .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status":"ok",
+            "error":null,
+            "data":{
+                "id":1,
+                "code":"GB",
+                "name":"UK",
+                "native_name":"United Kingdom",
+                "created_at": "2014-01-01T16:22:44.111Z",
+                "updated_at": "2014-01-01T16:22:44.111Z",
+                "deleted_at": "2014-01-01T16:22:44.111Z"
+            }
+        }
+        
+# Group Table: Language
+## {Removed} Get languages [/api/{major_api_version}/languages?{sync_at}]
+Fech language resources(table resources). 
+### Get languages [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + sync_at (optional, number, `1234567890`) ...  Last updated changes.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+  
++ Response 200 (application/json)
+
+        {
+            "status":"ok",
+            "error":null,
+            "data":[
+                {
+                    "id":1,
+                    "code":"en_GB",
+                    "name":"English",
+                    "native_name":"British english",
+                    "iso_code":"eng",
+                    "country":{
+                        "id":1
+                    },
+                    "created_at":"2014-01-01T16:22:44.111Z",
+                    "updated_at":"2014-01-01T16:22:44.111Z",
+                    "deleted_at":"2014-01-01T16:22:44.111Z"
+                },
+                {
+                    "id":2,
+                    "code":"en_US",
+                    "name":"English",
+                    "iso_code":"eng",
+                    "country":{
+                        "id":2
+                    },
+                    "native_name":"American english",
+                    "created_at":"2014-01-01T16:22:44.111Z",
+                    "updated_at":"2014-01-01T16:22:44.111Z",
+                    "deleted_at":"2014-01-01T16:22:44.111Z"
+                }
+            ]
+        }
+
+## {Removed} Get language [/api/{major_api_version}/languages/{id}]
+Fech single resource (table resource). 
+### Get language [GET] 
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `2`) ...  Unique identifier per source (table) .
+    
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        {
+            "status":"ok",
+            "error":null,
+            "data":{
+                "id":1,
+                "code":"en_GB",
+                "name":"English",
+                "native_name":"British english",
+                "iso_code":"eng",
+                "country":{
+                    "id":1
+                },
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z",
+                "deleted_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+
+# Group Table: InterfaceText
+## Get interface_texts [/api/{major_api_version}/interface_texts{?sync_at}]
+Fech interface text resources(table resources). Interface text are synchronized in sync changes pool as all other resources.
+Interface text item that does NOT have filled attributes is NOT send.
+### Get interface_texts [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + sync_at (optional, number, `1234567890`) ...  Last updated changes.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+  
++ Response 200 (application/json)
+
+        {
+            "status":"ok",
+            "error":null,
+            "data":[
+                {
+                    "id":1,
+                    "key":"key1",
+                    "value":"value1",
+                    "created_at":"2014-01-01T16:22:44.111Z",
+                    "updated_at":"2014-01-01T16:22:44.111Z",
+                    "deleted_at":"2014-01-01T16:22:44.111Z"
+                },
+                {
+                    "id":2,
+                    "key":"key2",
+                    "value":"value2",
+                    "created_at":"2014-01-01T16:22:44.111Z",
+                    "updated_at":"2014-01-01T16:22:44.111Z",
+                    "deleted_at":"2014-01-01T16:22:44.111Z"
+                }
+            ]
+        }
+        
+# Group Table: Favorite
+
+## Get favorite [/api/{major_api_version}/{favoritable_type}/{favoritable_id}/favorites]
+Fech and save favorite resources(table resources). 
+### Get favorite [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + favoritable_id (required, number, `12349`) ...  Id of favoritable item.
+    + favoritable_type (required, string, `recipe`) ...  Type of favoritable item.
+   
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+  
++ Response 200 (application/json)
+    
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": { 
+                "id":1,
+                "favoritable_id":12349,
+                "favoritable_type":"recipe",
+                "device_user_id":1,
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+
+##Save favorite [/api/{major_api_version}/{favoritable_type}/{favoritable_id}/favorites]
+### Save favorite [POST]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + favoritable_id (required, number, `12349`) ...  Id of favoritable item.
+    + favoritable_type (required, string, `recipe`) ...  Type of favoritable item.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+    
+    + Body {}
+    
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "id":1,
+                "favoritable_id": 12349,
+                "favoritable_type": "recipe",
+                "device_user_id":1,
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+        
+## Delete favorites [/api/{major_api_version}/{favoritable_type}/{favoritable_id}/favorites]
+### Delete favorite [DELETE]
+
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + favoritable_id (required, number, `12349`) ...  Id of favoritable item.
+    + favoritable_type (required, string, `recipe`) ...  Type of favoritable item. 
++ Request (application/json)
+
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
+    + Body {}
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "id":1,
+                "favoritable_id": 12349,
+                "favoritable_type": "recipe",
+                "device_user_id":1,
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+        
+# Group Table: Device User
+## Get device user's registration fields [/api/{major_api_version}/device_users/registration_fields]
+Will fetch all available fields for registration for the user in selected region(country).
+### Get device user's registration fields [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "required": ["email","password"],
+                "optional": ["first_name","last_name","address","city","country","postal_code","newsletter"]
+            }
+        }
+
+## Register user [/api/{major_api_version}/device_users]
+Create user resource via registration(table resources). 
+### Register device user [POST]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+    
+    + Body 
+            
+            {
+                "device_user":{
+                    "email":"johny.ive@apple.com",
+                    "password":"123456",
+                    "first_name":"Johny",
+                    "last_name":"Ive",
+                    "address":"Infinite-Loop",
+                    "city":"Cupertino",
+                    "country":"United-States",
+                    "postal_code":"14324",
+                    "newsletter":"true"
+                }
+            }
+    
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "email":"johny.ive@apple.com",
+                "first_name":"Johny",
+                "last_name":"Ive",
+                "address":"Infinite-Loop",
+                "city":"Cupertino",
+                "country":"United-States",
+                "postal_code":"14324",
+                "id":1,
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z"
+            }
+        }
+ 
+# Group Table: Appliance
+## Get list of appliances [/api/{major_api_version}/appliances]
+Will fetch all appliances in groups, create or delete subset of appliances for user.
+### Get list of appliances [GET]      
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+        
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": [{
+                        "keyword_key":"Refrigerators",
+                        "pncs":["113412341234123","113412341234123"]
+                    }]
+        }
+        
+        
+# Group Brand Content 
+Note: creating keywords not implemented
+
+## Get list of brand_content_texts [/api/{major_api_version}/brand_contents/{id}/brand_content_texts]
+### Get all brand content texts [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `1`) ...  Unique identifier per source (table) 
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data":[
+                {
+                   "id": 1,
+                   "key":"TITLE_GS",
+                   "value":"Getting Started",
+                   "created_at":"2014-01-01T16:22:44.111Z",
+                   "updated_at":"2014-01-01T16:22:44.111Z",
+                   "deleted_at":"2014-01-01T16:22:44.111Z" 
+                },
+                {
+                   "id": 2,
+                   "key":"SUBTITLE_GS",
+                   "value":"Getting Started subtitle",
+                   "created_at":"2014-01-01T16:22:44.111Z",
+                   "updated_at":"2014-01-01T16:22:44.111Z",
+                   "deleted_at":"2014-01-01T16:22:44.111Z"
+                } 
+            ]
+        }
+
+## Register new brand content [/api/{major_api_version}/brand_contents]
+### Register brand content [POST]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+    
+    + Body 
+
+            {
+                "brand_content":{
+                    "title":"Geting Started",
+                    "path":"http://...",
+                    "kind":"article",
+                    "feed_type":["taste"],
+                    "remote_image_url":https://lh4.ggpht.com/ikQIyM0RlQ55Qy0BWl6q05QWfEL8nWBS-XS6Tf70Ke5YRs2IglBnuxK27Hnp6IdvEcM=h900",
+                    "remote_icon_url":"https://lh4.ggpht.com/ikQIyM0RlQ55Qy0BWl6q05QWfEL8nWBS-XS6Tf70Ke5YRs2IglBnuxK27Hnp6IdvEcM=h900",
+                    "rank": 1,
+                    "brand_content_texts_attributes":[
+                        {
+                           "key":"TITLE_GS",
+                           "value":"Getting Started"
+                        }
+                    ]
+                }
+            }
+    
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "id":1,
+                "last_updated_at": 1439555924,
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z",
+                "title":"Geting Started",
+                "path":"app://my.aeg/feeds/content_browser?target=http://...",
+                "kind":"article",
+                "feed_type":["taste"],
+                "rank": 1,
+                "remote_image_url":"https://lh4.ggpht.com/ikQIyM0RlQ55Qy0BWl6q05QWfEL8nWBS-XS6Tf70Ke5YRs2IglBnuxK27Hnp6IdvEcM=h900",
+                "remote_icon_url":"https://lh4.ggpht.com/ikQIyM0RlQ55Qy0BWl6q05QWfEL8nWBS-XS6Tf70Ke5YRs2IglBnuxK27Hnp6IdvEcM=h900",
+                "brand_content_texts":[
+                    {
+                       "key":"TITLE_GS",
+                       "value":"Getting Started"
+                    },
+                    {
+                       "key":"tile_title",
+                       "value":"Geting Started"
+                    }
+                ]
+            }
+        }
+        
+## Update brand content [/api/{major_api_version}/brand_contents/{id}]
+### Update brand content [PATCH]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + id (required, number, `1`) ...  Unique identifier per source (table) 
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
+    
+    + Body 
+
+            {
+                "brand_content":{
+                    "title":"Geting Started 2",
+                    "last_updated_at": 1438009985,
+                    "brand_content_texts_attributes":[
+                        {
+                           "key":"TITLE_GS",
+                           "value":"GettingStarted"
+                        }
+                    ]
+                }
+            }
+    
++ Response 200 (application/json)
+
+        { 
+            "status": "ok", 
+            "error": null, 
+            "data": {
+                "id":1,
+                "last_updated_at": 1439555924,
+                "created_at":"2014-01-01T16:22:44.111Z",
+                "updated_at":"2014-01-01T16:22:44.111Z",
+                "title":"Geting Started 2",
+                "path":"app://my.aeg/feeds/content_browser?target=http://...",
+                "kind":"article",
+                "feed_type":["taste"],
+                "rank": 1,
+                "remote_image_url":"https://lh4.ggpht.com/ikQIyM0RlQ55Qy0BWl6q05QWfEL8nWBS-XS6Tf70Ke5YRs2IglBnuxK27Hnp6IdvEcM=h900",
+                "remote_icon_url":"https://lh4.ggpht.com/ikQIyM0RlQ55Qy0BWl6q05QWfEL8nWBS-XS6Tf70Ke5YRs2IglBnuxK27Hnp6IdvEcM=h900",
+                "brand_content_texts":[
+                    {
+                       "key":"TITLE_GS",
+                       "value":"Getting Started"
+                    },
+                    {
+                       "key":"tile_title",
+                       "value":"Geting Started 2"
+                    }
+                ]
+            }
+        }
+
+# Group Support
+
+## Get support page for appliance [/api/{major_api_version}/appliance_support{?search}{?context}]
+### Get support page for appliance [GET]
+
++ Parameters
+
+    + major_api_version (required, string, `v1`) ...  API major version.
+    + search (required, string, `error-123`) ...  Error code.
+    + context (required, string, `12341234123`) ...  Unique identifier per appliance (table) 
+
++ Request (application/json)
+    
+    + Header
+            
+            access_token: 913f9c49dcb544e2087cee284f4a00b7
++ Response 302 (text/html)
